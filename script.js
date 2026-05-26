@@ -104,7 +104,7 @@ function draw() {
 draw();
 
 const phrases = [
-  "Python & Langage C",
+  "Java & Langage C",
   "Réseaux Informatiques",
   "Cybersécurité / TryHackMe",
   "Développement Web",
