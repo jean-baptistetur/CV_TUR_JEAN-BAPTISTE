@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jean-Baptiste Tur — Ingénieur CIR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="cursor" id="cur"></div>
+    <div class="cursor-ring" id="ring"></div>
+    <div class="progress" id="prog"></div>
+
+    <nav id="nav">
+      <a href="#hero" class="nav-logo">JBT</a>
+      <ul class="nav-links">
+        <li><a href="#about">Profil</a></li>
+        <li><a href="#skills">Compétences</a></li>
+        <li><a href="#experience">Expériences</a></li>
+        <li><a href="#education">Formation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <section id="hero">
+      <canvas id="canvas-bg"></canvas>
+      <div class="hero-inner">
+        <p class="hero-eyebrow">Étudiant Ingénieur — CIR2 — Junia Bordeaux</p>
+        <div class="glitch-wrap">
+          <h1 class="glitch" data-text="TUR JEAN-BAPTISTE">TUR JEAN-BAPTISTE</h1>
+        </div>
+        <p class="hero-sub">Informatique &amp; Réseaux</p>
+        <div class="typerow">
+          <span class="type-prefix">~/</span>
+          <span id="tw"></span>
+          <span class="type-cur"></span>
+        </div>
+        <div class="hero-cta">
+          <a href="#about" class="btn btn-c">Découvrir</a>
+          <a href="#contact" class="btn btn-o">Me contacter</a>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="sh">
+        <span class="sn">01</span>
+        <h2 class="st">Profil</h2>
+        <div class="sl"></div>
+      </div>
+      <div class="about-g">
+        <div class="about-text reveal">
+          <p>
+            Étudiant en 2e année du Cycle <em>Informatique et Réseaux</em> à l'école
+            d'ingénieur Junia, je construis mes compétences à l'intersection de la
+            <em>programmation</em>, des <em>réseaux</em> et de la <em>cybersécurité</em>.
+          </p>
+          <p>
+            Persévérant, fiable, et discret, je m'implique pleinement dans chaque projet —
+            du code à l'infrastructure, du travail solo à la collaboration d'équipe.
+          </p>
+          <p>Né le 12 novembre 2006 — Nationalité française.</p>
+        </div>
+        <div class="stats reveal">
+          <div class="sc">
+            <div class="sn2">2</div>
+            <div class="sl2">Années CIR</div>
+          </div>
+          <div class="sc">
+            <div class="sn2">C / Py</div>
+            <div class="sl2">Langages</div>
+          </div>
+          <div class="sc">
+            <div class="sn2">3</div>
+            <div class="sl2">Expériences</div>
+          </div>
+          <div class="sc">
+            <div class="sn2">THM</div>
+            <div class="sl2">Certif. Cyber</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="sh">
+        <span class="sn">02</span>
+        <h2 class="st">Compétences</h2>
+        <div class="sl"></div>
+      </div>
+      <div class="sk-g">
+        <div>
+          <p class="sk-cat">// Techniques</p>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Python</span><span class="sk-pct">60%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 60%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Langage C</span><span class="sk-pct">70%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 70%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Réseaux informatiques</span
+              ><span class="sk-pct">75%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 75%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Développement Web</span
+              ><span class="sk-pct">65%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 65%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Cybersécurité</span><span class="sk-pct">60%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 60%"></div></div>
+          </div>
+        </div>
+        <div>
+          <p class="sk-cat">// Sciences & Soft-skills</p>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Mathématiques</span><span class="sk-pct">85%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 85%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Physique-Chimie</span><span class="sk-pct">75%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 75%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Persévérance</span><span class="sk-pct">95%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 95%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Travail en équipe</span
+              ><span class="sk-pct">90%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 90%"></div></div>
+          </div>
+          <div class="sk-item">
+            <div class="sk-row">
+              <span class="sk-name">Résolution de problèmes</span
+              ><span class="sk-pct">85%</span>
+            </div>
+            <div class="sk-track"><div class="sk-fill" style="--w: 85%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="sh">
+        <span class="sn">03</span>
+        <h2 class="st">Expériences</h2>
+        <div class="sl"></div>
+      </div>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2026</div>
+          <h3 class="tl-role">Stage d'exécution — EHPAD La Canopée</h3>
+          <p class="tl-org">La Canopée — Bordeaux</p>
+          <p class="tl-desc">
+            Immersion professionnelle en établissement de soins. Développement des
+            aptitudes relationnelles, sens des responsabilités et rigueur dans un
+            environnement structuré et exigeant.
+          </p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2023</div>
+          <h3 class="tl-role">Mission SNU — Armée de l'Air</h3>
+          <p class="tl-org">Armée de l'Air et de l'Espace — Saintes</p>
+          <p class="tl-desc">
+            Mission d'intérêt général au sein d'un environnement militaire. Acquisition de
+            discipline, sens du collectif et capacité d'adaptation à des contextes
+            contraignants.
+          </p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2022</div>
+          <h3 class="tl-role">Service National Universel</h3>
+          <p class="tl-org">Phase de découverte citoyenne</p>
+          <p class="tl-desc">
+            Participation à la phase civique du SNU — travail collaboratif, gestion de
+            projet collectif, initiation à l'engagement et à la citoyenneté active.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="sh">
+        <span class="sn">04</span>
+        <h2 class="st">Formation</h2>
+        <div class="sl"></div>
+      </div>
+      <div class="edu-g">
+        <div class="edu-c">
+          <div class="edu-yr">2024 — En cours</div>
+          <h3 class="edu-t">Cycle Ingénieur — Informatique &amp; Réseaux (CIR)</h3>
+          <p class="edu-p">JUNIA HEI — Bordeaux</p>
+        </div>
+        <div class="edu-c">
+          <div class="edu-yr">2025 — Certifié</div>
+          <h3 class="edu-t">Certificat de Validation en Cybersécurité</h3>
+          <p class="edu-p">TryHackMe Platform</p>
+          <a
+            href="https://tryhackme.com/certificate/THM-OMXSIXNRY4"
+            class="edu-link"
+            target="_blank"
+            >Voir le certificat</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="languages">
+      <div class="sh">
+        <span class="sn">05</span>
+        <h2 class="st">Langues</h2>
+        <div class="sl"></div>
+      </div>
+      <div class="lang-g">
+        <div class="lang-c">
+          <div class="lang-n">Français</div>
+          <div class="lang-l">Langue maternelle</div>
+          <div class="lang-dots">
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+          </div>
+        </div>
+        <div class="lang-c">
+          <div class="lang-n">Anglais</div>
+          <div class="lang-l">Courant</div>
+          <div class="lang-dots">
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+            <div class="ld"></div>
+          </div>
+        </div>
+        <div class="lang-c">
+          <div class="lang-n">Allemand</div>
+          <div class="lang-l">Notions de base</div>
+          <div class="lang-dots">
+            <div class="ld on"></div>
+            <div class="ld on"></div>
+            <div class="ld"></div>
+            <div class="ld"></div>
+            <div class="ld"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="hobbies">
+      <div class="sh">
+        <span class="sn">06</span>
+        <h2 class="st">Intérêts</h2>
+        <div class="sl"></div>
+      </div>
+      <div class="hob-g">
+        <span class="hob-tag">Badminton</span>
+        <span class="hob-tag">Formule 1</span>
+        <span class="hob-tag">Lecture</span>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-inner">
+        <div class="sh" style="justify-content: center">
+          <span class="sn">07</span>
+          <h2 class="st">Contact</h2>
+        </div>
+        <p class="contact-sub">
+          Ouvert aux opportunités de stage et projets collaboratifs
+        </p>
+        <div class="contact-links">
+          <a href="tel:+33768913044" class="ci">
+            <span class="ci-label">Téléphone</span>
+            <span>07 68 91 30 44</span>
+          </a>
+          <a href="mailto:turjeanbaptiste@gmail.com" class="ci">
+            <span class="ci-label">Email</span>
+            <span>turjeanbaptiste@gmail.com</span>
+          </a>
+          <a href="https://www.junia.com" target="_blank" class="ci">
+            <span class="ci-label">École</span>
+            <span>www.junia.com</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>© 2026 Jean-Baptiste Tur</span>
+      <span>CIR2 — Junia — Bordeaux</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
