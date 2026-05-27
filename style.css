@@ -18,6 +18,8 @@
 }
 html {
   scroll-behavior: smooth;
+  /* Compense la navbar fixe lors des ancres */
+  scroll-padding-top: 80px;
 }
 body {
   background: var(--bg);
@@ -37,6 +39,13 @@ body {
   border-radius: 2px;
 }
 
+/* Accessibilité clavier */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* ─── CURSEUR ────────────────────────────────────────── */
 .cursor {
   position: fixed;
   width: 10px;
@@ -66,6 +75,7 @@ body {
     opacity 0.2s;
 }
 
+/* ─── PROGRESS BAR ───────────────────────────────────── */
 .progress {
   position: fixed;
   top: 0;
@@ -77,6 +87,7 @@ body {
   width: 0;
 }
 
+/* ─── NAV ────────────────────────────────────────────── */
 nav {
   position: fixed;
   inset: 0 0 auto 0;
@@ -124,13 +135,52 @@ nav.scrolled {
   background: var(--cyan);
   transition: width 0.3s;
 }
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--cyan);
 }
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
   width: 100%;
 }
 
+/* ── Hamburger ── */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: none;
+  padding: 0;
+  z-index: 101;
+}
+.nav-burger span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: var(--cyan);
+  transition:
+    transform 0.3s,
+    opacity 0.3s,
+    width 0.3s;
+  transform-origin: center;
+}
+.nav-burger.open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.nav-burger.open span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+.nav-burger.open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
 #hero {
   position: relative;
   height: 100vh;
@@ -144,6 +194,18 @@ nav.scrolled {
   position: absolute;
   inset: 0;
   z-index: 0;
+}
+/* Grille subtile en arrière-plan */
+#hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  pointer-events: none;
 }
 .hero-inner {
   position: relative;
@@ -399,6 +461,7 @@ h1.glitch::after {
   }
 }
 
+/* ─── SECTIONS ───────────────────────────────────────── */
 section {
   padding: 7rem 8vw;
 }
@@ -439,14 +502,12 @@ section {
   align-items: start;
 }
 
-/* ── Photo block ── */
 .about-photo {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.9rem;
 }
-
 .photo-frame {
   position: relative;
   width: 100%;
@@ -458,8 +519,6 @@ section {
     0 0 40px rgba(0, 229, 255, 0.12),
     0 0 80px rgba(0, 229, 255, 0.05);
 }
-
-/* Vignette + colour-grade overlay */
 .photo-frame::before {
   content: "";
   position: absolute;
@@ -476,7 +535,6 @@ section {
   z-index: 2;
   pointer-events: none;
 }
-
 .photo-img {
   width: 100%;
   height: 100%;
@@ -492,8 +550,6 @@ section {
   transform: scale(1.05);
   filter: contrast(1.1) brightness(1) saturate(1);
 }
-
-/* Animated scan line */
 .photo-scan {
   position: absolute;
   left: 0;
@@ -517,8 +573,6 @@ section {
     opacity: 0;
   }
 }
-
-/* Glare streak */
 .photo-glare {
   position: absolute;
   top: -60%;
@@ -544,8 +598,6 @@ section {
     transform: translateX(200%);
   }
 }
-
-/* Corner brackets */
 .photo-corner {
   position: absolute;
   width: 18px;
@@ -559,7 +611,6 @@ section {
   width: 26px;
   height: 26px;
 }
-
 .c-tl {
   top: 8px;
   left: 8px;
@@ -584,7 +635,6 @@ section {
   border-bottom: 2px solid var(--cyan);
   border-right: 2px solid var(--cyan);
 }
-
 .photo-caption {
   font-size: 0.58rem;
   color: var(--cyan);
@@ -593,7 +643,6 @@ section {
   text-align: center;
 }
 
-/* ── Text & stats ── */
 .about-text {
   font-family: "Crimson Pro", serif;
   font-size: 1.25rem;
@@ -855,7 +904,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 0.2rem;
+  margin-top: 0.9rem;
   font-size: 0.62rem;
   color: var(--cyan);
   text-decoration: none;
@@ -883,19 +932,22 @@ section {
   padding: 2rem;
   text-align: center;
   opacity: 0;
-  transform: translateY(20px);
+  /* On utilise uniquement l'opacité dans la transition reveal,
+     le transform est géré séparément pour ne pas bloquer le hover */
   transition:
     opacity 0.6s,
     transform 0.6s,
     border-color 0.3s;
-}
-.lang-c:hover {
-  border-color: var(--border-h);
-  transform: translateY(-4px);
+  transform: translateY(20px);
 }
 .lang-c.vis {
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
+}
+/* Correction bug : hover doit surcharger .vis */
+.lang-c.vis:hover {
+  border-color: var(--border-h);
+  transform: translateY(-4px);
 }
 .lang-n {
   font-family: "Orbitron", sans-serif;
@@ -1033,6 +1085,39 @@ footer {
   letter-spacing: 0.1em;
 }
 
+/* ─── RETOUR EN HAUT ──────────────────────────────────── */
+.back-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border-h);
+  background: var(--bg2);
+  color: var(--cyan);
+  font-size: 1.1rem;
+  cursor: none;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.3s,
+    transform 0.3s,
+    border-color 0.3s,
+    background 0.3s;
+  pointer-events: none;
+  line-height: 1;
+}
+.back-top.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.back-top:hover {
+  border-color: var(--cyan);
+  background: rgba(0, 229, 255, 0.1);
+}
+
 /* ─── REVEAL ─────────────────────────────────────────── */
 .reveal {
   opacity: 0;
@@ -1057,6 +1142,33 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  .nav-burger {
+    display: flex;
+  }
+  .nav-links {
+    position: fixed;
+    inset: 0 0 0 30%;
+    background: rgba(4, 6, 15, 0.97);
+    backdrop-filter: blur(20px);
+    border-left: 1px solid var(--border);
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.5rem;
+    padding: 3rem;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 100;
+  }
+  .nav-links.open {
+    transform: translateX(0);
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+  }
+}
+
 @media (max-width: 680px) {
   .about-g {
     grid-template-columns: 1fr;
@@ -1064,5 +1176,15 @@ footer {
   .about-photo {
     max-width: 240px;
     margin: 0 auto;
+  }
+  .sk-g {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .edu-g {
+    grid-template-columns: 1fr;
+  }
+  .lang-g {
+    grid-template-columns: 1fr;
   }
 }

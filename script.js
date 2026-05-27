@@ -1,9 +1,11 @@
+// ─── CURSEUR ────────────────────────────────────────────
 const cur = document.getElementById("cur");
 const ring = document.getElementById("ring");
 let mx = 0,
   my = 0,
   fx = 0,
   fy = 0;
+
 document.addEventListener("mousemove", (e) => {
   mx = e.clientX;
   my = e.clientY;
@@ -17,7 +19,8 @@ document.addEventListener("mousemove", (e) => {
   ring.style.top = fy + "px";
   requestAnimationFrame(follow);
 })();
-document.querySelectorAll("a,button,.sc,.hob-tag").forEach((el) => {
+
+document.querySelectorAll("a,button,.sc,.hob-tag,.back-top").forEach((el) => {
   el.addEventListener("mouseenter", () => {
     cur.style.width = "18px";
     cur.style.height = "18px";
@@ -34,23 +37,71 @@ document.querySelectorAll("a,button,.sc,.hob-tag").forEach((el) => {
   });
 });
 
+// ─── SCROLL ─────────────────────────────────────────────
+const backTopBtn = document.getElementById("backTop");
+
 window.addEventListener("scroll", () => {
   const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
   document.getElementById("prog").style.width = pct + "%";
   document.getElementById("nav").classList.toggle("scrolled", window.scrollY > 40);
+  backTopBtn.classList.toggle("show", window.scrollY > 400);
 });
 
+backTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+// ─── NAV ACTIVE ──────────────────────────────────────────
+const navLinks = document.querySelectorAll(".nav-links a");
+const sections = document.querySelectorAll("section[id]");
+
+const navObs = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        navLinks.forEach((l) => l.classList.remove("active"));
+        const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if (active) active.classList.add("active");
+      }
+    });
+  },
+  { threshold: 0.35 },
+);
+sections.forEach((s) => navObs.observe(s));
+
+// ─── MENU HAMBURGER ──────────────────────────────────────
+const burger = document.getElementById("burger");
+const navLinksEl = document.getElementById("navLinks");
+
+burger.addEventListener("click", () => {
+  const isOpen = burger.classList.toggle("open");
+  navLinksEl.classList.toggle("open", isOpen);
+  burger.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
+});
+
+// Ferme le menu au clic sur un lien
+navLinksEl.querySelectorAll("a").forEach((l) => {
+  l.addEventListener("click", () => {
+    burger.classList.remove("open");
+    navLinksEl.classList.remove("open");
+    burger.setAttribute("aria-label", "Ouvrir le menu");
+  });
+});
+
+// ─── CANVAS PARTICULES ───────────────────────────────────
 const canvas = document.getElementById("canvas-bg");
 const ctx = canvas.getContext("2d");
 let W = 0,
   H = 0,
   pts = [];
+
 function resize() {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
 }
 resize();
 window.addEventListener("resize", resize);
+
 for (let i = 0; i < 110; i++) {
   pts.push({
     x: Math.random() * W,
@@ -67,6 +118,7 @@ document.addEventListener("mousemove", (e) => {
   mouseX = e.clientX;
   mouseY = e.clientY;
 });
+
 function draw() {
   ctx.clearRect(0, 0, W, H);
   pts.forEach((p, i) => {
@@ -75,16 +127,16 @@ function draw() {
     if (p.x < 0 || p.x > W) p.vx *= -1;
     if (p.y < 0 || p.y > H) p.vy *= -1;
     const dx = p.x - mouseX,
-      dy = p.y - mouseY,
-      d = Math.sqrt(dx * dx + dy * dy);
+      dy = p.y - mouseY;
+    const d = Math.sqrt(dx * dx + dy * dy);
     if (d < 100) {
       p.x += (dx / d) * 0.8;
       p.y += (dy / d) * 0.8;
     }
     pts.slice(i + 1).forEach((q) => {
       const ex = p.x - q.x,
-        ey = p.y - q.y,
-        ed = Math.sqrt(ex * ex + ey * ey);
+        ey = p.y - q.y;
+      const ed = Math.sqrt(ex * ex + ey * ey);
       if (ed < 130) {
         ctx.strokeStyle = `rgba(0,229,255,${0.07 * (1 - ed / 130)})`;
         ctx.lineWidth = 0.5;
@@ -103,15 +155,13 @@ function draw() {
 }
 draw();
 
-const phrases = [
-  "Java & Langage C",
-  "Cybersécurité / TryHackMe",
-  "Développement Web",
-];
+// ─── TYPEWRITER ──────────────────────────────────────────
+const phrases = ["Java & Langage C", "Cybersécurité / TryHackMe", "Développement Web"];
 let pi = 0,
   ci = 0,
   del = false;
 const twEl = document.getElementById("tw");
+
 function type() {
   const ph = phrases[pi];
   if (!del) {
@@ -132,6 +182,7 @@ function type() {
 }
 type();
 
+// ─── INTERSECTION OBSERVERS ───────────────────────────────
 const obs = new IntersectionObserver(
   (entries) => {
     entries.forEach((e) => {
